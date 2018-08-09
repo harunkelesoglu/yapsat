@@ -8,6 +8,8 @@
 
 <ul>
 <li><a href="#what">What is YapSat ?</a></li>
+<li><a href="#docs">DEMO</a></li>
+<li><a href="#docs">API Documantation and Test</a></li>
 <li><a href="#endpoints">Endpoints</a></li>
 <li><a href="#installation">Installation</a></li>
 <li><a href="#structure">Project Structure</a></li>
@@ -17,8 +19,15 @@
 
 <h2><a href="#what" aria-hidden="true" class="anchor" id="user-content-what"></a>What is YapSat ?</h2>
 <p>Yapsat is a location-based platform which Housewifes makes money in return makes food. You can give an order home cooking As a customer to office meeting and organizations or you can give order home cooking as a student from the nearest point or specific selling point.	 Note: food was chosen as a startup type on this project. </p>
-<h3>DEMO</h3>
-<img src="../public/assets/gifs/demo.gif">
+
+<h2><a href="#what" aria-hidden="true" class="anchor" id="user-content-what"></a>DEMO</h2>
+The application was deployed in heroku. You can request the following link with postman
+https://yapsat.herokuapp.com/api/user
+
+<h2><a href="#docs"aria-hidden="true" class="anchor" id="user-content-what"> </a> API Documantation and Test</h2>
+After running the application you can see the documentation of the application and test the requests in below link
+<a href="http://localhost:8080/swagger-ui.html#/user-controller">http://localhost:port/swagger-ui.html#/user-controller</a>
+
 <h3>Features</h3>
 <ul>
   <li>Recipients see the nearest seller which location close to the recipient and  then view after that commence the purchase.</li>
