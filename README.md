@@ -22,11 +22,11 @@
 
 <h2><a href="#what" aria-hidden="true" class="anchor" id="user-content-what"></a>DEMO</h2>
 The application was deployed in heroku. You can request the following link with postman
-https://yapsat.herokuapp.com/api/user
+https://yapsat.herokuapp.com/swagger-ui.html#/user-controller
 
 <h2><a href="#docs"aria-hidden="true" class="anchor" id="user-content-what"> </a> API Documantation and Test</h2>
 After running the application you can see the documentation of the application and test the requests in below link
-<a href="http://localhost:8080/swagger-ui.html#/user-controller">http://localhost:port/swagger-ui.html#/user-controller</a>
+<a href="https://yapsat.herokuapp.com/swagger-ui.html#/user-controller">http://localhost:port/swagger-ui.html#/user-controller</a>
 
 <h3>Features</h3>
 <ul>
