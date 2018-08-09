@@ -74,9 +74,7 @@
 ├── security
     └── JWTAuthenticationFİlter.java
     └── JWTAuthorization.java
-    └── SecurityConstants.java
-├── app.js
-    └── UserDetailsServiceImpl.java           
+    └── SecurityConstants.java         
 </pre>
 </div>
 
