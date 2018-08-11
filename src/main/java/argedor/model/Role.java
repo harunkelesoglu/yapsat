@@ -3,6 +3,8 @@ package argedor.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Document(collection = "roles")
 public class Role {
 
@@ -10,6 +12,10 @@ public class Role {
 	private String id;
 	
 	private String role;
+	
+	public Role() {
+		
+	}
 	
 	public Role(String role) {
 		this.role = role;

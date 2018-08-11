@@ -1,7 +1,10 @@
 package argedor.model;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Document(collection = "orders")
 public class Order {
@@ -10,13 +13,18 @@ public class Order {
 	private String id;
 	private String seller;
 	private String buyer;
-	private String foodName;
+	private Product product;
 	private boolean approved = false;
+	
+//	For deserialisation purposes Order must have this contructor
+	public Order() {
+		
+	}
 
-	public Order(String seller, String buyer, String foodName, boolean approved) {
+	public Order(String seller, String buyer, Product product, boolean approved) {
 		this.seller = seller;
 		this.buyer = buyer;
-		this.foodName = foodName;
+		this.product = product;
 		this.approved = approved;
 	}
 
@@ -44,12 +52,12 @@ public class Order {
 		this.buyer = buyer;
 	}
 
-	public String getFoodName() {
-		return foodName;
+	public Product getProduct() {
+		return product;
 	}
 
-	public void setFoodName(String foodName) {
-		this.foodName = foodName;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
 	public Boolean getApproved() {

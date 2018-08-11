@@ -1,30 +1,27 @@
 package argedor.model;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "products")
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Product {
 
-	@Id
-	private String id;
 	private String name;
-
 	private String photo;
 	private String info;
+
+	// For deserialisation purposes Product must have this contructor
+	public Product() {
+
+	}
 
 	public Product(String name, String photo, String info) {
 		this.name = name;
 		this.photo = photo;
 		this.info = info;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
 	}
 
 	public String getName() {

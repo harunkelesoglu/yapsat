@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -14,35 +15,33 @@ import argedor.model.Product;
 import argedor.model.Role;
 import argedor.model.User;
 import argedor.repository.OrderRepository;
-import argedor.repository.ProductRepository;
 import argedor.repository.RoleRepository;
 import argedor.repository.UserRepository;
 
 @Component
 public class DBSeeder implements CommandLineRunner {
 
+	@Autowired
 	private OrderRepository orderRepository;
+	@Autowired
 	private RoleRepository roleRepository;
-	private ProductRepository productRepository;
+	@Autowired
 	private UserRepository userRepository;
+	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-	public DBSeeder(OrderRepository orderRepository, RoleRepository roleRepository, ProductRepository productRepository,
-			UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
-
-		this.orderRepository = orderRepository;
-		this.productRepository = productRepository;
-		this.roleRepository = roleRepository;
-		this.userRepository = userRepository;
-		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-	}
 
 	@Override
 	public void run(String... args) throws Exception {
 
-		Order order1 = new Order("ayseteyze", "kharun", "Patatesli Kol Böreği", false);
-		Order order2 = new Order("fatmahanim", "kharun", "Tiramisu", false);
-		Order order3 = new Order("ayseteyze", "demo", "Yaprak sarması", false);
+		Product product1 = new Product("Patetesli Kol Böreği", "kolboreg.jpg",
+				"Niğdenin meşhur yeni mahsül patatesleri ile yapılmış enfes kol böreği ile midenizi doldurun");
+		Product product2 = new Product("tiramisu", "tiramisu.jpg", "mükkemmel kremalı ağzınıza layık :)");
+		Product product3 = new Product("Yaprak sarması", "sarma",
+				"Niğdenin meşhur yeni mahsül patatesleri ile yapılmış enfes kol böreği ile midenizi doldurun");
+		
+		Order order1 = new Order("ayseteyze", "kharun", product1, false);
+		Order order2 = new Order("fatmahanim", "kharun", product2, false);
+		Order order3 = new Order("ayseteyze", "demo", product3, false);
 
 		Role buyer = new Role("BUYER");
 		Role seller = new Role("SELLER");
@@ -51,12 +50,6 @@ public class DBSeeder implements CommandLineRunner {
 		Set<Role> role2 = new HashSet<>();
 		role1.add(buyer);
 		role2.add(seller);
-
-		Product product1 = new Product("Patetesli Kol Böreği", "kolboreg.jpg",
-				"Niğdenin meşhur yeni mahsül patatesleri ile yapılmış enfes kol böreği ile midenizi doldurun");
-		Product product2 = new Product("tiramisu", "tiramisu.jpg", "mükkemmel kremalı ağzınıza layık :)");
-		Product product3 = new Product("Yaprak sarması", "sarma",
-				"Niğdenin meşhur yeni mahsül patatesleri ile yapılmış enfes kol böreği ile midenizi doldurun");
 
 		User user1 = new User("Harun", "KELEŞOĞLU", "kharun", bCryptPasswordEncoder.encode("admin"), "harun@demo.com",
 				new float[] { 23.345f, 34.2342f }, role1, null, Arrays.asList(order1, order2));
@@ -69,17 +62,15 @@ public class DBSeeder implements CommandLineRunner {
 
 		this.orderRepository.deleteAll();
 		this.roleRepository.deleteAll();
-		this.productRepository.deleteAll();
 		this.userRepository.deleteAll();
 
 		List<Order> orders = Arrays.asList(order1, order2, order3);
 		List<Role> roles = Arrays.asList(buyer, seller);
 		List<Product> products = Arrays.asList(product1, product2, product3);
 		List<User> users = Arrays.asList(user1, user2, user3, user4);
-		
+
 		this.orderRepository.saveAll(orders);
 		this.roleRepository.saveAll(roles);
-		this.productRepository.saveAll(products);
 		this.userRepository.saveAll(users);
 	}
 }

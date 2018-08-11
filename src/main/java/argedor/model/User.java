@@ -8,8 +8,6 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 
-import argedor.model.Product;
-
 @Document(collection = "users")
 public class User {
 
@@ -24,7 +22,6 @@ public class User {
 	private float location[];
 	@DBRef
 	private Set<Role> roles;
-	@DBRef
 	private List<Product> products;
 	@DBRef
 	private List<Order> orders;
