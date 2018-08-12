@@ -2,8 +2,10 @@ package argedor.security;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.stream.Collectors;
 
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -53,9 +55,13 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 	@Override
 	public void successfulAuthentication(HttpServletRequest req, HttpServletResponse res, FilterChain chain,
 			Authentication auth) throws IOException, ServletException {
-
+		String authorities = auth.getAuthorities().stream()
+				.map(GrantedAuthority::getAuthority)
+				.collect(Collectors.joining(","));
+		
 		String token = JWT.create()
 				.withSubject(((org.springframework.security.core.userdetails.User) auth.getPrincipal()).getUsername())
+				.withClaim("ROLE", authorities)
 				.withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME)).sign(HMAC512(SECRET.getBytes()));
 		// token added the header
 		res.addHeader(HEADER_STRING, TOKEN_PREFIX + token);

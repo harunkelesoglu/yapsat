@@ -2,6 +2,9 @@ package argedor.security;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.stream.Collectors;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -10,11 +13,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.Claim;
+
+import io.jsonwebtoken.Claims;
+
 import static argedor.security.SecurityConstants.HEADER_STRING;
 import static argedor.security.SecurityConstants.SECRET;
 import static argedor.security.SecurityConstants.TOKEN_PREFIX;
@@ -49,8 +58,14 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 			String user = JWT.require(Algorithm.HMAC512(SECRET.getBytes())).build()
 					.verify(token.replace(TOKEN_PREFIX, "")).getSubject();
 
+			String role = JWT.require(Algorithm.HMAC512(SECRET.getBytes())).build()
+					.verify(token.replace(TOKEN_PREFIX, "")).getClaim("ROLE").toString();
+			
+			Collection authorities = Arrays.asList(role.split(",")).stream()
+					.map(authority -> new SimpleGrantedAuthority(authority)).collect(Collectors.toList());
+
 			if (user != null) {
-				return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
+				return new UsernamePasswordAuthenticationToken(user, null, authorities);
 			}
 			return null;
 		}
