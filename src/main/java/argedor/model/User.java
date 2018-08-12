@@ -20,7 +20,6 @@ public class User {
 	private String password;
 	private String email;
 	private float location[];
-	@DBRef
 	private Set<Role> roles;
 	private List<Product> products;
 	@DBRef

@@ -19,12 +19,14 @@ import argedor.model.Product;
 import argedor.model.User;
 import argedor.repository.OrderRepository;
 import argedor.repository.UserRepository;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("/api/order")
+@Api(value = "User Controller", description = "Makes the CRUD operations for orders")
 public class OrderController {
 
 	@Autowired

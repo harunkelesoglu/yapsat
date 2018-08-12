@@ -6,6 +6,8 @@ import argedor.model.Role;
 
 public interface RoleRepository extends MongoRepository<Role, String>{
 
+	Role findByRole(String role);
+
 //	Role findByRole(String role);
 
 }

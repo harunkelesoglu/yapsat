@@ -14,12 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 import argedor.model.Product;
 import argedor.model.User;
 import argedor.repository.UserRepository;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("/api/product")
+@Api(value = "User Controller", description = "Makes the CRUD operations for product")
 public class ProductController {
 
 	@Autowired
