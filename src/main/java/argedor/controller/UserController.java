@@ -2,6 +2,7 @@ package argedor.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,9 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import argedor.exception.ConflictException;
 import argedor.exception.NotFoundException;
-import argedor.model.Order;
-import argedor.model.Product;
+import argedor.model.Role;
 import argedor.model.User;
+import argedor.repository.RoleRepository;
 import argedor.repository.UserRepository;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -24,16 +25,17 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("/api/user")
-@Api(value = "User Controller", description = "Makes the CRUD operations for user,order,product")
+@Api(value = "User Controller", description = "Makes the CRUD operations for user")
 public class UserController {
 
+	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-	public UserController(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
-		this.userRepository = userRepository;
-		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-	}
+	
+	@Autowired
+	private RoleRepository roleRepository;
 
 	@ApiOperation(value = "Return All Users")
 	@ApiResponses(value = {
@@ -55,6 +57,18 @@ public class UserController {
 			return user;
 		}
 		throw new NotFoundException(username + " not found");
+	}
+	
+	@ApiOperation(value = "Get all seller on system.")
+	@ApiResponses(value = {
+			@ApiResponse(code = 401, message = "Unauthorized. You have to take a token from /login path."),
+			@ApiResponse(code = 403, message = "Forbidden. You just don’t have permission to access this resource.") })
+	@GetMapping("/seller")
+	public List<User> getSeller(){
+		String roleName = "SELLER";
+		Role role = this.roleRepository.findByRole(roleName);
+		List<User> users = this.userRepository.findByRole(role.getId());
+		return users;
 	}
 
 	@ApiOperation(value = "Add new user")
