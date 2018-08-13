@@ -41,7 +41,7 @@ public class OrderController {
 			@ApiResponse(code = 403, message = "Forbidden. You just don’t have permission to access this resource.") })
 	@PostMapping("/all")
 	public List<Order> getOrders(@RequestBody Map<String, String> seller) {
-
+		
 		List<Order> orders = this.orderRepository.findOrdersBySeller(seller.get("seller"));
 		return orders;
 	}
@@ -70,12 +70,17 @@ public class OrderController {
 			@ApiResponse(code = 403, message = "Forbidden. You just don’t have permission to access this resource.") })
 	@PutMapping
 	public void updateOrderStatus(@RequestBody Map<String, String> body) {
-
+		
 		String orderId = body.get("id");
 		boolean approved = Boolean.valueOf(body.get("approved"));
-		Optional<Order> order = this.orderRepository.findById(orderId);
-		order.get().setApproved(approved);
-		this.orderRepository.save(order.get());
+		
+		try {
+			Optional<Order> order = this.orderRepository.findById(orderId);
+			order.get().setApproved(approved);
+			this.orderRepository.save(order.get());
+		}catch(Exception e) {
+			throw new NotFoundException(orderId+" not found.");
+		}
 
 	}
 
