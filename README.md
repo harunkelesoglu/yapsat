@@ -8,7 +8,7 @@
 
 <ul>
 <li><a href="#what">What is YapSat ?</a></li>
-<li><a href="#docs">DEMO</a></li>
+<li><a href="#demo">DEMO</a></li>
 <li><a href="#docs">API Documantation and Test</a></li>
 <li><a href="#endpoints">Endpoints</a></li>
 <li><a href="#installation">Installation</a></li>
@@ -20,13 +20,17 @@
 <h2><a href="#what" aria-hidden="true" class="anchor" id="user-content-what"></a>What is YapSat ?</h2>
 <p>Yapsat is a location-based platform which Housewifes makes money in return makes food. You can give an order home cooking As a customer to office meeting and organizations or you can give order home cooking as a student from the nearest point or specific selling point.	 Note: food was chosen as a startup type on this project. </p>
 
-<h2><a href="#what" aria-hidden="true" class="anchor" id="user-content-what"></a>DEMO</h2>
-The application was deployed in heroku. You can request the following link with postman
-https://yapsat.herokuapp.com/swagger-ui.html#/user-controller
+<h2><a href="#demo" aria-hidden="true" class="anchor" id="user-content-what"></a>DEMO</h2>
+The application was deployed in heroku. You can request the following link with postman.
+https://yapsat.herokuapp.com/swagger-ui.html<br>
+if you have docker in local, you can run the following command
+<pre>
+    $ docker run -p 8080:8080 kelesoglu/argedor-rest-api:1.1
+</pre>
 
 <h2><a href="#docs"aria-hidden="true" class="anchor" id="user-content-what"> </a> API Documantation and Test</h2>
 After running the application you can see the documentation of the application and test the requests in below link
-<a href="https://yapsat.herokuapp.com/swagger-ui.html#/user-controller">http://localhost:port/swagger-ui.html#/user-controller</a>
+<a href="https://yapsat.herokuapp.com/swagger-ui.html">http://localhost:port/swagger-ui.html</a>
 
 <h3>Features</h3>
 <ul>
@@ -37,11 +41,28 @@ After running the application you can see the documentation of the application a
 <h2><a href="#endpoinst" aria-hidden="true" class="anchor" id="user-content-what"></a>EndPoints</h2>
 <h3>This app have the following endpoints</h3>
 <ul>
+<li><h4>UserController</h4>
+<ul>
 <li><h4>GET - /api/user/</h4> Return all users on system.</li>
 <li><h4>GET - /api/user/{username}</h4> Return user by username in path</li>
 <li><h4>POST - /api/user/register </h4> Add new user.</li>
-<li><h4>POST - /api/user/update </h4> Update user information.</li>
+<li><h4>GET - /api/user/seller </h4> Get</li>
 <li><h4>DELETE - /api/user/{username} </h4> Delet user by username in path</li>
+</ul>
+<li><h4>OrderController</h4>
+<ul>
+<li><h4>POST - /api/order/all</h4> Return orders of seller.</li>
+<li><h4>PUT - /api/order</h4> Update order status. </li>
+<li><h4>POST - /api/order</h4> Add new order.</li>
+<li><h4>DELETE - /api/order </h4> Delet order by orderId</li>
+</ul>
+</li>
+<li><h4>ProductController</h4>
+<ul>
+<li><h4>POST - /api/product/{seller}</h4> Add new product to seller.</li>
+</ul>
+</li>
+</li>
 </ul>
 
 
@@ -49,9 +70,9 @@ After running the application you can see the documentation of the application a
 <p>You should run the following command to install depencies of project and run</p>
 
 <div class="highlight highlight-source-shell">
-<pre>$ mvn install 
-     $ mvn clean package
-     $ mvn spring-boot:run 
+<pre>
+    $ mvn clean package
+    $ mvn spring-boot:run 
 </pre>
 </div>
 
@@ -67,6 +88,8 @@ After running the application you can see the documentation of the application a
     └── Documentation.java        
 ├── controler      
     └── UserController.java
+    └── OrderController.java
+    └── ProductController.java
 ├── model    
     └── User.java
     └── Order.java
@@ -75,7 +98,6 @@ After running the application you can see the documentation of the application a
 ├── repository   
     └── OrderRepository.java
     └── ProductRepository.java
-    └── RoleRepository.java
     └── UserRepository.java
 ├── exception
     └── ConflictException.java
@@ -83,7 +105,10 @@ After running the application you can see the documentation of the application a
 ├── security
     └── JWTAuthenticationFİlter.java
     └── JWTAuthorization.java
-    └── SecurityConstants.java         
+    └── SecurityConstants.java  
+├── service
+    └── UserDetailsServiceImpl.java
+      
 </pre>
 </div>
 
