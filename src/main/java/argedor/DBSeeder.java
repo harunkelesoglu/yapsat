@@ -59,18 +59,18 @@ public class DBSeeder implements CommandLineRunner {
 				new float[] { 23.345f, 34.2342f }, role2, Arrays.asList(product1, product3), null);
 		User user4 = new User("Fatma", "hanim", "fatmahanim", bCryptPasswordEncoder.encode("admin"), "demo3@demo.com",
 				new float[] { 23.345f, 34.2342f }, role2, Arrays.asList(product2), null);
-
-		this.orderRepository.deleteAll();
-		this.roleRepository.deleteAll();
-		this.userRepository.deleteAll();
-
-		List<Order> orders = Arrays.asList(order1, order2, order3);
-		List<Role> roles = Arrays.asList(buyer, seller);
-		List<Product> products = Arrays.asList(product1, product2, product3);
-		List<User> users = Arrays.asList(user1, user2, user3, user4);
-
-		this.orderRepository.saveAll(orders);
-		this.roleRepository.saveAll(roles);
-		this.userRepository.saveAll(users);
+//
+//		this.orderRepository.deleteAll();
+//		this.roleRepository.deleteAll();
+//		this.userRepository.deleteAll();
+//
+//		List<Order> orders = Arrays.asList(order1, order2, order3);
+//		List<Role> roles = Arrays.asList(buyer, seller);
+//		List<Product> products = Arrays.asList(product1, product2, product3);
+//		List<User> users = Arrays.asList(user1, user2, user3, user4);
+//
+//		this.orderRepository.saveAll(orders);
+//		this.roleRepository.saveAll(roles);
+//		this.userRepository.saveAll(users);
 	}
 }
