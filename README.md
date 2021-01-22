@@ -1,5 +1,4 @@
 <p align="center">
-  <img src="https://www.imageupload.co.uk/images/2018/02/16/82785541-606c-4506-82ae-7fef916fa7b3.png" border="0">
 </p>
 <article class="markdown-body entry-content" itemprop="text"><h1><a href="#scrapy" aria-hidden="true" class="anchor" id="user-content-scrapy"></a>README YapSat</h1>
 <p>This project was created on <b>"Semih Öztürk Hackathon"</b></p>
